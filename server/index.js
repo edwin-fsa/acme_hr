@@ -1,5 +1,6 @@
 // imports here for express and pg
 import express from "express";
+import path from "path";
 import pg from "pg";
 
 const app = express();
@@ -10,6 +11,12 @@ const client = new pg.Client({
 });
 
 // static routes here (you only need these for deployment)
+app.get("/", (req, res) => {
+  res.sendFile(
+    path.join(import.meta.dirname, "..", "client", "dist", "index.html")
+  );
+});
+
 // app routes here
 app.get("/api/employees", async (req, res) => {
   const { rows } = await client.query("SELECT * FROM employees");
