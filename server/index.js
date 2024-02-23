@@ -7,7 +7,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const client = new pg.Client({
-  database: "acme_hr_db",
+  connectionString:
+    process.env.DATABASE_URL || "postgresql://localhost:5432/acme_hr_db",
 });
 
 // static routes here (you only need these for deployment)
